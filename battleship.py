@@ -1,6 +1,20 @@
 
 from random import randint  
 
+class Boat:
+  row = 0
+  col = 0
+
+  def checkRow(self, guessRow):
+    return (self.row == int(guessRow))
+
+  def checkCol(self, guessCol):
+    return (self.col ==int(guessCol))
+
+  def print(self):
+    print("(", self.row, ", ", self.col, ')')
+
+
 board = []
 
 for x in range(0, 5):
@@ -17,15 +31,20 @@ def random_row(board):
 def random_col(board):
   return randint(0, len(board) - 1)
 
-ship_row = random_row(board)
-ship_col = random_col(board)
-#print(ship_row)
-#print(ship_col)
+
+enemyBoat = Boat();
+enemyBoat.row = random_row(board)
+enemyBoat.col = random_col(board)
+
+enemyBoat.print()
+
+
 
 for turn in range(0,5):
   guess_row = input("Guess row: ")
   guess_col = input("Guess col: ")
-  if guess_row == str(ship_row) and guess_col == str(ship_col):
+
+  if (enemyBoat.checkRow(guess_row) and enemyBoat.checkCol(guess_col)) :
     print("Congratulations! You sunk my battleship!!!")
     break
   else:
